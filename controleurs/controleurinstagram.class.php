@@ -8,7 +8,8 @@ class ControleurInstagram {
 
 	public function execute() {
 		if (Utils::getPost('infl-inp-search-ig')) {
-			$this->report();
+			$urlIg = Utils::filtreFort($_POST['infl-inp-search-ig']);
+			$this->report($urlIg);
 		} else {
 			$this->searchIn();
 		}
@@ -44,11 +45,7 @@ class ControleurInstagram {
 		$vue->create('resultIg', ['data'=>$reponse_ig]);
 	}
 
-	public function report() {
-
-		$param = ["limit" => 4];
-
-		$url = Utils::filtreFort($_POST['infl-inp-search-ig']);
+	public function report($url) {
 
 		$token = '';
 		if (Utils::getPost('infl-token-ig')) $token = Utils::filtreFort($_POST['infl-token-ig']);

@@ -17,6 +17,7 @@ class ControleurAccueil {
 			if(isset($_POST['btn-yt-search'])) {
 				// contoleur youtube
 			} elseif (isset($_POST['btn-ig-search'])) {
+				
 				$ctrl = new ControleurInstagram();
 				$ctrl->execute();
 			} else {
@@ -38,6 +39,7 @@ class ControleurAccueil {
 			$result = $modele->existeLogin($_login, $_pass);
 			if(!empty($result)) {
 				$_SESSION['infl-user'] = $result[0]['display_name'];
+				header("Location: ".PATH);
 			} else {
 				$_SESSION['erreur'] = 'ERROR: Login or password is incorect!';
 			}

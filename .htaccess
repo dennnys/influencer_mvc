@@ -2,6 +2,6 @@ RewriteEngine On
 
 RewriteBase /infl/
 
-RewriteRule ^([a-z]+)/([a-z\-]+)\/?$ /infl/index.php?controleur=$1&action=$2&%{QUERY_STRING} [L]
+RewriteRule ^([a-z]+)/([0-9]+)\/?$ /infl/index.php?controleur=$1&id=$2&%{QUERY_STRING} [L]
 
 RewriteRule ^([a-z]+)\/?$ /infl/index.php?controleur=$1&%{QUERY_STRING} [L]

@@ -3,8 +3,6 @@ require_once 'header.php';
 
 require_once 'form_search.php';
 
-var_dump($data);
-
 if (empty($data->accounts)) { 
 	?>
 	<div class="row">
@@ -54,7 +52,7 @@ if (empty($data->accounts)) {
 			    <div class="card-text"><?= $account->geoLocation[0]->title ?></div>
 			    <div class="card-text"><?= $account->followers ?> followers</div>
 			    <p class="card-text"><?= $account->engagements ?> engagements</p>
-			    <a href="<?= PATH ?>raportIg/<?= $account->socialId ?>" class="btn btn-imm">raport...</a>
+			    <a href="<?= PATH ?>reportig/<?= $account->socialId ?>" class="btn btn-imm">raport...</a>
 			  </div>
 			</div>
 			<?php } //end foreach ?>

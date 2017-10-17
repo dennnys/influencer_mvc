@@ -29,7 +29,12 @@ class Utils {
 	 */
 	static function getGet($value) {
 		if (isset($_GET[$value])) {
-			return $_GET[$value];
+			if($_GET[$value] != '') {
+				return $_GET[$value];
+			} else {
+				return false;
+			}
+			
 		} else { return false; }
 	}
 
