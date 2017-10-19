@@ -1,7 +1,10 @@
 <?php 
+
 require_once 'header.php';
 
 require_once 'form_search.php';
+
+ob_start();
 
 if (empty($data->accounts)) { 
 	?>
@@ -10,6 +13,7 @@ if (empty($data->accounts)) {
 	</div>
 <?php 
 } else {
+
  ?>
 
 
@@ -31,7 +35,7 @@ if (empty($data->accounts)) {
 			</div>
 			<div class="infl-export col-md-4">
 				export result: 
-				<a href="#">PDF</a> - 
+				<a href="<?= PATH ?>pdfresultig">PDF</a> - 
 				<a href="#">CSV</a>
 			</div>
 		</div>
@@ -46,7 +50,9 @@ if (empty($data->accounts)) {
 			foreach ($data->accounts as $account) {
 		 ?>
 			<div class="card col-md-4 col-lg-3 col-sm-6" >
-			  <img class="card-img-top" src="<?= $account->picture ?>" alt="<?= $account->fullname ?>">
+			  <div>
+			  	<img class="card-img-top" src="<?= $account->picture ?>" alt="<?= $account->fullname ?>">
+			  </div>
 			  <div class="card-body">
 			    <h4 class="card-title"><a target="_blank" href="<?= $account->link ?>"><?= $account->fullname ?></a></h4>
 			    <div class="card-text"><?= $account->geoLocation[0]->title ?></div>
@@ -57,9 +63,18 @@ if (empty($data->accounts)) {
 			</div>
 			<?php } //end foreach ?>
 		</div>
+
 <?php 
+
+
+	$temp_html = ob_get_clean();
+
+	$_SESSION['temp_html'] = $temp_html;
+	echo $_SESSION['temp_html'];	
 	}
-require_once 'footer.php';
+
+	require_once 'footer.php';
+
  ?>
 
 

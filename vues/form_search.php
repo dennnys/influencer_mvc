@@ -80,7 +80,7 @@
 			</form>
 			<!-- end form youtube -->
 			<!-- form instagram -->
-			<form id="infl-form-ig" method="POST" class="col-md-12 infl-form-search">
+			<form id="infl-form-ig" action="<?= PATH ?>" method="POST" class="col-md-12 infl-form-search">
 
 				<div class="row">
 					<div class="col-md-3 col-lg-2"></div>

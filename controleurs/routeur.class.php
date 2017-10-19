@@ -1,5 +1,8 @@
 <?php 
 
+		require_once 'lib/dompdf/autoload.inc.php';
+		use Dompdf\Dompdf;
+
 class Routeur {
 
 
@@ -22,6 +25,9 @@ class Routeur {
 				break;
 			case 'reportig':
 				$this->reportIg();
+				break;
+			case 'pdfresultig':
+				$this->pdfresultig();
 				break;
 
 			default:
@@ -47,6 +53,29 @@ class Routeur {
 				header("Location: ".PATH);
 			}
 		}
+	}
+
+	private function pdfresultig() {
+	//	require_once 'lib/dompdf/autoload.inc.php';
+		//echo $_SESSION['temp_html'];
+	//	use Dompdf\Dompdf;
+		// instantiate and use the dompdf class
+		$dompdf = new Dompdf();
+		ob_start();
+		include_once 'pdf_template/ig_result.php';
+		$temp = ob_get_clean();
+		$dompdf->loadHtml($temp);
+		//echo ($temp); die();
+
+		// (Optional) Setup the paper size and orientation
+		$dompdf->setPaper('A4', 'landscape');
+
+		// Render the HTML as PDF
+		$dompdf->render();
+
+		// Output the generated PDF to Browser
+		$dompdf->stream("instagram");
+
 	}
 
 } //end routeur
