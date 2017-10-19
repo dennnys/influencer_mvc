@@ -1,4 +1,5 @@
 	</div>
+
 	<footer class="infl-footer">
 		<div class="row r1">
 			<div class="col-md-4">
@@ -36,5 +37,7 @@
 	</footer>
 	<script src="<?= PATH_THEME ?>js/infl-config.js" type="text/javascript"></script>
 	<script src="<?= PATH_THEME ?>js/infl-main.js" type="text/javascript"></script>
+	<!-- <script src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script> -->
+	<script type="text/javascript" src="https://apis.google.com/js/client.js?onload=init"></script>
 </body>
 </html>
