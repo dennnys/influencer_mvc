@@ -13,7 +13,8 @@ class ControleurAccueil {
 			$vue = new ControleurVue();
 			$vue->create('login', ['data'=>$data]);
 
-		} else {
+		 } 
+		 else {
 			if(isset($_POST['btn-yt-search'])) {
 				// contoleur youtube
 			} elseif (isset($_POST['btn-ig-search'])) {

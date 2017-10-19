@@ -16,7 +16,7 @@
 					</div>
 					<div class="infl-button col-md-3 col-lg-2 text-center">
 						<div>
-							<button class="btn btn-imm" type="submit">SEARCH</button>
+							<button id="searchchannels" class="btn btn-imm" type="submit">SEARCH</button>
 						</div>
 						
 					</div>
@@ -145,4 +145,6 @@
 
 			</form>
 			<!-- end form instagram -->
+
+			<div <div class="row"id="infl-resultat"></div>
 		</div>

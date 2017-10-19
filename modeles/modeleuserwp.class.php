@@ -6,7 +6,7 @@ class ModeleUserWP {
 		$db = SingletonPDO::getInstance();
 		$pass = md5($pass);
 
-		$query = $db->prepare("SELECT display_name FROM wrdprss_users WHERE user_login = ? AND user_pass = ?");
+		$query = $db->prepare("SELECT display_name FROM wp_users WHERE user_login = ? AND user_pass = ?");
 		$query->execute([$login, $pass]);
 		//var_dump($query); die();
 
