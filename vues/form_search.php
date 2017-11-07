@@ -23,64 +23,84 @@
 				</div>
 
 				<div class="row">
-					<a class="ifl-btn-advaced col-md-12" data-toggle="collapse" href="#infl-filters-advanced-yt"><span>advance filters</span></a> 
+					<a class="ifl-btn-advaced col-md-12" data-toggle="collapse" href="#infl-filters-advanced-yt"><span>advanced filters</span></a> 
 				</div>
 				<div id="infl-filters-advanced-yt" class="collapse">
 					<div class="row justify-content-md-center ">
 						<div class="form-group col-md-3">
+							<label for="infl-type-yt">Looking for</label><br>
+							<select name="infl-type-yt" id="infl-type-yt" class="form-control">
+							  <option value="channel">Channels</option>
+							  <option value="video">Videos</option>
+							  <option value="user">User</option>
+							</select>
+						</div>
+						
+						<div class="form-group col-md-3">
 							<label for="infl-category-yt">Category</label><br>
-							<select name="infl-category-yt" id="infl-category-yt" class="form-control">
-							  <option value=""></option>
-							  <option value="1">category1</option>
-							  <option value="2">category2</option>
-							  <option value="3">category3</option>
-							  <option value="4">category4</option>
+							<select name="infl-country-yt" id="infl-category-yt" class="form-control"><option value="0"></option>
+							  <option value="1">Film & Animation</option>
+							  <option value="2">Autos & Vehicles</option>
+							  <option value="10">Music</option>
+							  <option value="15">U.S.A.</option>
+							  <option value="17">Sports</option>
+							  <option value="18">Short Movies</option>
+							  <option value="19">Travel & Events</option>
+							  <option value="20">Gaming</option>
+							  <option value="21">Videoblogging</option>
+							  <option value="22">People & Blogs</option>
+							  <option value="23">Comedy</option>
+							  <option value="24">Entertainment</option>
+							  <option value="25">News & Politics</option>
+							  <option value="26">Howto & Style</option>
+							  <option value="27">Education</option>
+							  <option value="28">Science & Technology</option>
+							  <option value="29">Nonprofits & Activism</option>
+							  <option value="30">Movies</option>
+							  <option value="31">Anime/Animation</option>
+							  <option value="32">Action/Adventure</option>
+							  <option value="33">Classics</option>
+							  <option value="34">Comedy</option>
+							  <option value="35">Documentary</option>
+							  <option value="36">Drama</option>
+							  <option value="37">Family</option>
+							  <option value="38">Foreign</option>
+							  <option value="39">Horror</option>
+							  <option value="40">Sci-Fi/Fantasy</option>
+							  <option value="41">Thriller</option>
+							  <option value="42">Shorts</option>
+							  <option value="43">Shows</option>
+							  <option value="44">Trailers</option>
 							</select>
 						</div>
-						<div class="col-md-1"></div>
 						<div class="form-group col-md-3">
-							<label for="infl-country-yt">Country</label><br>
-							<select name="infl-country-yt" id="infl-country" class="form-control">
-							  <option value=""></option>
-							  <option value="1">country1</option>
-							  <option value="2">country2</option>
-							  <option value="3">country3</option>
-							  <option value="4">country4</option>
+							<label for="infl-resultat-page-yt">Results/page</label><br>
+							<select name="infl-resultat-page-yt" id="infl-resultat-page-yt" class="form-control">
+							  <option value="12">12</option>
+							  <option value="24">24</option>
+							  <option value="36">36</option>
+							  <option value="48">48</option>
+							</select>
+						</div>
+						<div id="infl-location" class="form-group col-md-3 hidden">
+							<label for="infl-location-yt">Location</label><br>
+							<select name="infl-location-yt" id="infl-location-yt" class="form-control">
+							  <option value="0"></option>
+							  <option value="45.501689, -73.567256">Montreal</option>
+							  <option value="43.653226, -79.383184">Toronto</option>
+							  <option value="49.282729, -123.120738">Vancouver</option>
 							</select>
 						</div>
 					</div>
-					<div class="row justify-content-md-center ">
-						<div class="form-group col-md-3">
-							<label for="infl-subscr-min-yt">Subscribes</label><br>
-							<input id="infl-subscr-min-yt" name="infl-subscr-min-yt" type="text" class="form-control col-md-4" placeholder="min">
-							<input id="infl-subscr-max-yt" name="infl-subscr-max-yt" type="text" class="form-control col-md-4" placeholder="max">
-						</div>
-						<div class="col-md-1"></div>
-						<div class="form-group col-md-3">
-							<label for="infl-age-min-yt">Age</label><br>
-							<input id="infl-age-min-yt" type="text" name="infl-age-min-yt" class="form-control col-md-4" placeholder="min">
-							<input id="infl-age-max-yt" name="infl-age-max-yt" type="text" class="form-control col-md-4" placeholder="max">
-						</div>
-					</div>
-					<div class="row justify-content-md-center ">
-						<div class="form-group col-md-3">
-							<label for="infl-views-min-yt">Total views</label><br>
-							<input id="infl-views-min-yt" name="infl-views-min-yt" type="text" class="form-control col-md-4" placeholder="min">
-							<input id="infl-views-max-yt" name="infl-views-max-yt" type="text" class="form-control col-md-4" placeholder="max">
-						</div>
-						<div class="col-md-1"></div>
-						<div class="form-group col-md-3">
-							<label for="infl-videos-min-yt">Total videos</label><br>
-							<input id="infl-videos-min-yt" name="infl-videos-min-yt" type="text" class="form-control col-md-4" placeholder="min">
-						</div>
-					</div>
+					
+					
 
 				</div><!-- end infl-filters-advanced -->
 
 			</form>
 			<!-- end form youtube -->
 			<!-- form instagram -->
-			<form id="infl-form-ig" action="<?= PATH ?>" method="POST" class="col-md-12 infl-form-search">
+			<form id="infl-form-ig" method="POST" class="col-md-12 infl-form-search">
 
 				<div class="row">
 					<div class="col-md-3 col-lg-2"></div>
@@ -145,6 +165,13 @@
 
 			</form>
 			<!-- end form instagram -->
-
-			<div <div class="row"id="infl-resultat"></div>
+			&nbsp;
+			<div id="sortby" class="col-md-12"></div>
+			<div class="row" id="infl-resultat"></div>
+			<div id="scrollprev"></div>
+			<div class="ml-auto"id="scrollnext"></div>
 		</div>
+
+		
+
+
