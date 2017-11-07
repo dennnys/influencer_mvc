@@ -116,7 +116,7 @@
 				</div>
 
 				<div class="row">
-					<a class="ifl-btn-advaced col-md-12" data-toggle="collapse" href="#infl-filters-advanced-ig"><span>advance filters</span></a> 
+					<a class="ifl-btn-advaced col-md-12" data-toggle="collapse" href="#infl-filters-advanced-ig"><span>advanced filters</span></a> 
 				</div>
 				<div id="infl-filters-advanced-ig" class="collapse">
 					<div class="row justify-content-md-center ">
