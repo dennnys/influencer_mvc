@@ -8,9 +8,9 @@ if (empty($data) || isset($data->error)) {
 	<div class="row">
 	<?php 
 		if(isset($data->error)) {
-			echo "<h3>Token is finish !</h3>";
+			echo "<h3>Your token has expired.</h3>";
 		} else {
-			echo "<h3>Not rezultat !</h3>";
+			echo "<h3>No result found !</h3>";
 		}
 	?>
 	</div>
@@ -29,7 +29,7 @@ if (empty($data) || isset($data->error)) {
 <br>
 <div class="row" id="infl-resultat">
 
-	<div class="col-sm-2"><img src="<?= $data->picture ?>" alt="<?= $data->fullName ?>"></div>
+	<div class="col-sm-2"><img src="<?= $data->picture ?>" style="max-width: 100%" alt="<?= $data->fullName ?>"></div>
 	<div class="col-sm-1"></div>
 	<div class="col-sm-9">
 		<h2><a href="<?= $data->url ?>"><?= $data->fullName ?></a></h2>

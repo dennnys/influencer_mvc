@@ -4,9 +4,9 @@
 	top: 0;
 	left: 0;
 	z-index: 10;
-	background-color: rgba(255, 255, 255, 0.5)
+	background-color: rgba(255, 255, 255, 0.8)
 }
-.infl-header>div>div>img{
+.infl-header>div>div>a>img{
 	padding: 20px;
 }
 .infl-header ul li {

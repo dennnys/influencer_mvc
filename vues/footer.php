@@ -5,15 +5,15 @@
 			<div class="col-md-4">
 				<h3>Have a project in mind?</h3>
 				<p>Let's partner up and bring it to life !</p>
-				<a class="btn-footer" href="#">Get in touch</a>
+				<a class="btn-footer" href="mailto:milad@imagemotion.com">Get in touch</a>
 			</div>
 			<div class="col-md-4">
 				<h3>Montreal</h3>
-				<p>1275 Avenue des Canadiens-de-Montreal, 5th floor <br>Montreal, Quebec. H3B 0G4 <br> T: +1 514 690 0623 <br>E: <a href="">info@imagemotion.com</a></p>
+				<p>1275 Avenue des Canadiens-de-Montreal, 5th floor <br>Montreal, Quebec. H3B 0G4 <br> T: +1 514 690 0623 <br>E: <a href="mailto:info@imagemotion.com">info@imagemotion.com</a></p>
 			</div>
 			<div class="col-md-4">
 				<h3>New buisness inquiries</h3>
-				<p>Milad Sahafzadeh <br>President <br>T: +1 514 690 0623 <br>E: <a href="">milad@imagemotion.com</a></p>
+				<p>Milad Sahafzadeh <br>President <br>T: +1 514 690 0623 <br>E: <a href="mailto:milad@imagemotion.com">milad@imagemotion.com</a></p>
 			</div>
 		</div>
 		<div class="row r2">

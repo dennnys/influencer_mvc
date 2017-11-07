@@ -9,13 +9,12 @@ ob_start();
 if (empty($data->accounts)) { 
 	?>
 	<div class="row">
-		<h3>Not rezultat !</h3>
+		<h3>No result found!</h3>
 	</div>
 <?php 
 } else {
 
  ?>
-
 
 		<div class="row">
 			<div class="infl-sort col-md-8">
@@ -58,21 +57,14 @@ if (empty($data->accounts)) {
 			    <div class="card-text"><?= $account->geoLocation[0]->title ?></div>
 			    <div class="card-text"><?= $account->followers ?> followers</div>
 			    <p class="card-text"><?= $account->engagements ?> engagements</p>
-			    <a href="<?= PATH ?>reportig/<?= $account->socialId ?>" class="btn btn-imm">raport...</a>
+			    <a href="<?= PATH ?>reportig/<?= $account->socialId ?>" class="btn btn-imm">REPORT</a>
 			  </div>
 			</div>
 			<?php } //end foreach ?>
 		</div>
 
 <?php 
-
-
-	$temp_html = ob_get_clean();
-
-	$_SESSION['temp_html'] = $temp_html;
-	echo $_SESSION['temp_html'];	
-	}
-
+}
 	require_once 'footer.php';
 
  ?>

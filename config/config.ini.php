@@ -4,7 +4,7 @@
 defined('INFL') or die('Access interdi');
 
 // path par default
-define('PATH', 'http://localhost/influencermvc/');
+define('PATH', 'http://imorigine:8001/infl/');
 
 // vues
 define('PATH_THEME', PATH.'vues/');
@@ -13,4 +13,4 @@ define('PATH_THEME', PATH.'vues/');
 const DB_SERVEUR = 'localhost';
 const DB_LOGIN = 'root';
 const DB_PASSWORD= '';
-const DB_NOM = 'wp';
+const DB_NOM = 'imorigine';

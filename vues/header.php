@@ -23,17 +23,16 @@
 	<header class="container-fluid infl-header">
 		<div class="row align-items-center">
 			<div class="col-md-4 text-center">
-				<img src="<?= PATH_THEME ?>img/IM_200x69_BLK.png" alt="ImageMotion">
+				<a href="http://imagemotion.com/"><img src="<?= PATH_THEME ?>img/IM_200x69_BLK.png" alt="ImageMotion"></a>
 			</div>
 			<div class="col-md-8 text-right">
 				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">Expertise</a></li>
-					<li><a href="#">Work</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Careers</a></li>
-					<li><a href="#">Influencer</a></li>
-					<li><a href="#">Contact</a></li>
+					<li><a href="http://imagemotion.com/">Home</a></li>
+					<li><a href="http://imagemotion.com/expertise">Expertise</a></li>
+					<li><a href="http://imagemotion.com/portfolio">Work</a></li>
+					<li><a href="http://imagemotion.com/blog">Blog</a></li>
+					<li><a href="http://imagemotion.com/careers">Careers</a></li>
+					<li><a href="http://imagemotion.com/contact">Contact</a></li>
 				</ul>
 			</div>
 		</div>

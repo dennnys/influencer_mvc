@@ -9,7 +9,7 @@
 				</div>
 				<div class="col-md-12 form-group">
 					<label for="infl-pass">Password</label><br>
-					<input id="infl-pass" name="infl-pass" type="text" class="form-control">
+					<input id="infl-pass" name="infl-pass" type="password" class="form-control">
 				</div>
 				<div class="infl-button text-center">
 					<div>

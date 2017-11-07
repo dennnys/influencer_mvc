@@ -137,7 +137,7 @@
 						<div class="col-md-1"></div>
 						<div class="form-group col-md-3">
 							<label for="infl-token-ig">Token</label><br>
-							<input id="infl-token-ig" name="infl-token-ig" type="text" class="form-control col-md-12" placeholder="token active" value="cpi5rfwn1q0wkoc">
+							<input id="infl-token-ig" name="infl-token-ig" type="text" class="form-control col-md-12" placeholder="token active" value="9xbo5flvt7so0gg">
 						</div>
 					</div>
 

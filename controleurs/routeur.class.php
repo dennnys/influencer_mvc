@@ -38,6 +38,7 @@ class Routeur {
 	}
 
 	private function accueil() {
+		//var_dump(md5('denis123'));die();
 		$_crtlPage = new ControleurAccueil();
 		$_crtlPage->execute();
 	}
@@ -56,10 +57,7 @@ class Routeur {
 	}
 
 	private function pdfresultig() {
-	//	require_once 'lib/dompdf/autoload.inc.php';
-		//echo $_SESSION['temp_html'];
-	//	use Dompdf\Dompdf;
-		// instantiate and use the dompdf class
+
 		$dompdf = new Dompdf();
 		ob_start();
 		include_once 'pdf_template/ig_result.php';
@@ -68,7 +66,7 @@ class Routeur {
 		//echo ($temp); die();
 
 		// (Optional) Setup the paper size and orientation
-		$dompdf->setPaper('A4', 'landscape');
+		$dompdf->setPaper('A4', 'portrait');
 
 		// Render the HTML as PDF
 		$dompdf->render();
