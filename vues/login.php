@@ -13,7 +13,7 @@
 				</div>
 				<div class="infl-button text-center">
 					<div>
-						<button class="btn btn-imm" name="infl-btn-login" type="submit">Entre</button>
+						<button class="btn btn-imm" name="infl-btn-login" type="submit">ENTER</button>
 					</div>
 				</div>
 			</form>
