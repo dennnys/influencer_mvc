@@ -774,15 +774,12 @@ function convertToCSV(objArray) {
             '"'+ $('#description').html()+'"',
             '"'+$('#subscriberCount').html()+'"', 
              '"'+$('#viewCount').html()+'"', 
-            // "commentCount":stats.items[0].statistics.commentCount,
             '"'+$('#videoCount').html()+'"',
             '"'+ $('#averageView').html()+'"',
             '"'+$('#url').html()+'"',
             '"'+$('#country').html()+'"'].join(',');
             str+=cvsValues+'\n';
 
-            //id =$('#id').attr('href');
-            //console.log(id+" ID ICI!!!");
             console.log(str);
 
       var encodedUri = encodeURI(str);
@@ -799,6 +796,7 @@ function convertToCSV(objArray) {
 
   }// fin function convertToCSVModal
 
+//Creating the CSV for one video (modal)
   function convertToCSVVideo(){ 
 
     var fields= ["URL","channelTitle","description","viewCount","dislikeCount","likeCount","favoriteCount","commentCount"];
@@ -811,14 +809,10 @@ function convertToCSV(objArray) {
             '"'+ $('#descriptionvideo').html()+'"',
             '"'+$('#viewCountvideo').html()+'"', 
              '"'+$('#dislikeCountvideo').html()+'"', 
-            // "commentCount":stats.items[0].statistics.commentCount,
             '"'+$('#likeCountvideo').html()+'"',
             '"'+ $('#favoriteCountvideo').html()+'"',
             '"'+ $('#commentCountvideo').html()+'"'].join(',');
             str+=cvsValues+'\n';
-
-            //id =$('#id').attr('href');
-            //console.log(id+" ID ICI!!!");
             console.log(str);
 
       var encodedUri = encodeURI(str);
