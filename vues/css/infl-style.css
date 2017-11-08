@@ -192,6 +192,19 @@
 #sort-resultat {
 	display: none;
 }
+
+#infl-type-yt {
+	 z-index: 999;
+}
+
+#infl-category-yt{
+	 z-index: 999;
+}
+
+#infl-resultat-page-yt
+{
+	 z-index: 999;
+}
 /* card */
 #infl-resultat .card {
 	border: none;

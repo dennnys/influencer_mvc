@@ -1,3 +1,16 @@
+/**
+ * Influencer-Main JS
+ *
+ * File managing events and front ends.
+ *
+ * Javascript 
+ * JQuery
+ * Ajax
+ *
+ * @author     Denis Birnaz, Maxime Bourrier
+ * @version    1.01
+ */
+
 
 var nextPageToken, prevPageToken;
 var firstPage=true;
@@ -10,9 +23,10 @@ var canvasl;
 var q = 0;
 var radius = "50km";
 
+//displays results
 function tplawesome(e,t){res=e;for(var n=0;n<t.length;n++){res=res.replace(/\{\{(.*?)\}\}/g,function(e,r){return t[n][r]})}return res}
 
-
+//query builder
 function execRequest(type, maxResults, pageToken){
 
   q = encodeURIComponent($("#infl-inp-search-yt").val()).replace(/%20/g, "+");
@@ -27,13 +41,11 @@ function execRequest(type, maxResults, pageToken){
                 //publishedAfter: "2015-01-01T00:00:00Z",
                 pageToken:pageToken
            };
-console.log("**************PASSE PAR LA************");
+
           var category = $("#infl-category-yt").val();
           var location = $("#infl-location-yt").val();
           //console.log("category="+category);
           var typeCat = $("#infl-type-yt").val();
-
-          console.log("!!!!!!!!!!!!!!typecat="+typeCat);
 
            if (category != 0){
             params[typeCat+'CategoryId'] = category;
@@ -65,18 +77,13 @@ console.log(params);
            (params);
 
            console.log(request);
-           //console.log(request.NE);
-           //console.log(q);
-       
-       
+           
        // execute the request
        request.execute(function(response) 
        {
           var results = response.result;
           console.log(response.result)
-          //console.log(q)
-          //console.log(results);
-          //console.log(results.items[0].id.channelId);
+         
           var test=results.items[0].id.channelId;
           numresults = results.pageInfo.totalResults;
           resultsArray = [];
@@ -87,38 +94,34 @@ console.log(params);
                 //si response est differente de pageToken donne lui la valeur de prevPageToken
                 //sinon donne la valeur undifined 
           
-
-       //  console.log(requestById = 
-       // gapi.client.youtub);
+         //affichage des resultats       
          $("#infl-resultat").html("");
 
         if (prevPageToken){
-
+          //previous button
          $('#scrollprev').html("<div id=\"page\"><button type=\"button\" id=\"prevPageButton\">Prev Page</button></div>");
 
         }
 
         if (nextPageToken){
+          //next button
         $('#scrollnext').html("<div id=\"page\"><button type=\"button\" id=\"nextPageButton\">Next Page</button></div>");
       }
       $('#nextPageButton').on("click", function(e)
     {
-       // alert('i am clicked');
-       
-        //console.log(nextPageToken);
+       //execute la requete avec ses parametres
         execRequest(type,maxResults,nextPageToken);
     });
     
      $('#prevPageButton').click(function()
     {
-       // alert('i am clicked');
-        //console.log(prevPageToken);
+       //execute the query for the next results
         execRequest(type,maxResults,prevPageToken);
     });
      
      displaySort();
 
-
+          //for each result of the array get the statistics...
            $.each(results.items, function(index, item) 
            {
             item = getStats(item, type, maxResults);
@@ -128,48 +131,48 @@ console.log(params);
        });
 }
 
+//displays the sorting div
 function displaySort(){
 
 $('#sortby').html(
-  '<div class="row">'+
-      '<div class="infl-sort col-md-8">'+
-        '<div class="form-group">'+
+  
+      '<div class="infl-sort col-md-12">'+
+      '<div class="row">'+
+        '<div class="form-group col-md-4">'+
           '<div class="row">'+
 
             '<div class="mt-2">'
               +'<label for="">Sort by: &nbsp</label>'
             +'</div>'
-          +'<select name="infl-sort" id="yt-sort" class="form-control col-md-3">'
+          +'<select name="infl-sort" id="yt-sort" class="form-control col-md-5">'
                 +'<option  selected="selected value=""></option>'+
                 '<option  value="triersubs">Subscribers</option>'+
                   '<option value="triervideo" ">Videos</option>'+
                   '<option value="trierviews">Views</option>'+
             '</select>'+
-            '<select name="infl-sort-sens" id="yt-sort-sens" class="form-control col-md-3">'+
+            '<select name="infl-sort-sens" id="yt-sort-sens" class="form-control col-md-4">'+
                   '<option value="1">UP</option>'+
                   '<option value="2">DOWN</option>'+
             '</select>'+
             '</div>'+
         '</div>'+
+        '<div class="infl-export col-md-4 text-right mt-2">'+
+              'export results: '+
+              '<a id="cmdPage" href="#">PDF -</a>'+
+              '<a id="screenshotChannels" href="#"> Screenshot -</a>'+
+              '<a id="csvPage" href="#"> CSV</a>'+
+          '</div>'+
+          '<div class=" col-md-3 mt-2  ml-auto text-right" id="numresults">'+
       '</div>'+
-      '<p class="mt-2" id="numresults">'+
-      '</p>'+
+      '</div>'+
+      
       '<div>'+
       '</div>'+
-    '<div class="infl-export col-md-4 text-right mt-2">'+
-      'export results: '+
-      // '<button id="cmdPage" type="button" class="btn btn-primary">PDF</button>'+
-      '<a id="cmdPage" href="#">PDF -</a>'+
-      '<a id="screenshotChannels" href="#"> Screenshot -</a>'+
-      '<a id="csvPage" href="#"> CSV</a>'+
-    '</div>'+
 '</div>'+
 '<a id="pdfdownload"></a>');
-
+//formating numbers
 $("#numresults").text(numberWithCommas(numresults)+" results");
-
-
-
+//sort by
 $('#yt-sort').on('change', function()
 {
   if($('#yt-sort-sens').val() == 1){
@@ -178,7 +181,7 @@ $('#yt-sort').on('change', function()
     trierAsc(this.value);
   }
 });
-
+//sort up or down
 $('#yt-sort-sens').on('change', function()
 {
   if(this.value == 1){
@@ -187,30 +190,55 @@ $('#yt-sort-sens').on('change', function()
     trierAsc($('#yt-sort').val());
   }
 });
-
+//screenshot link
 $('#screenshotChannels').click(function (){
 
 html2canvas($("#infl-resultat"), {
   onrendered: function(canvas) {
       canvas.setAttribute("id", "canvas");
+
+
       document.body.appendChild(canvas);
-
+  
     var imageData = document.getElementById('canvas').toDataURL("image/png");
-
-    
-    ////debut telechargement image
+    
+    //debut telechargement image
     var valeurRecherche = $("#infl-inp-search-yt").val();
-      $('#pdfdownload').attr('href', imageData);
-      $('#pdfdownload').attr('download',valeurRecherche+'.png');
-      $('#pdfdownload')[0].click();
-         
-    ////fin telechargement pdf
+     $('#pdfdownload').attr('href', imageData);
+     $('#pdfdownload').attr('download',valeurRecherche+'.png');
+     $('#pdfdownload')[0].click();
+    document.getElementById('canvas').remove();
+    //fin telechargement image
     
-    ///debut telechargement pdf
-         var doc = new jsPDF();
-         doc.addImage(imageData, 'JPEG', 0, 0);
-         doc.save(valeurRecherche+'.pdf');
-    ///fin telechargement pdf
+  },
+    allowTaint: false,
+    useCORS: true,
+    proxy:"https://yt3.ggpht.com",
+    logging:true
+   });
+ 
+ });//fin $('#screenshotChannels').click(function ()
+
+//screenshot for the channel modal
+$('#cmdScreenshotChannel').click(function (){
+
+html2canvas($("#contentchannel"), {
+  onrendered: function(canvas) {
+      canvas.setAttribute("id", "canvas");
+
+
+      document.body.appendChild(canvas);
+  
+    var imageData = document.getElementById('canvas').toDataURL("image/png");
+    
+    
+    //debut telechargement image
+    var valeurRecherche = $("#title").val();
+     $('#pdfdownload').attr('href', imageData);
+     $('#pdfdownload').attr('download',valeurRecherche+'.png');
+     $('#pdfdownload')[0].click();
+document.getElementById('canvas').remove();
+    //fin telechargement image
 
   },
     allowTaint: false,
@@ -221,9 +249,43 @@ html2canvas($("#infl-resultat"), {
  
  });//fin $('#screenshotChannels').click(function ()
 
+//screenshot for the video modal
+$('#cmdScreenshotVideo').click(function (){
+
+html2canvas($("#ModalVideo"), {
+  onrendered: function(canvas) {
+      canvas.setAttribute("id", "canvas");
 
 
+      document.body.appendChild(canvas);
+  
+    var imageData = document.getElementById('canvas').toDataURL("image/png");
+    
+    
+    //debut telechargement image
+    var valeurRecherche = $("#titlevideo").val();
+     $('#pdfdownload').attr('href', imageData);
+     $('#pdfdownload').attr('download',valeurRecherche+'.png');
+     $('#pdfdownload')[0].click();
+document.getElementById('canvas').remove();
+    //fin telechargement image
+    
+    ///debut telechargement pdf
+         //var doc = new jsPDF();
+         //doc.addImage(imageData, 'JPEG', 0, 0);
+         //doc.save(valeurRecherche+'.pdf');
+    ///fin telechargement pdf
 
+  },
+    allowTaint: false,
+    useCORS: true,
+    proxy:"https://i.ytimg.com/vi/",
+    logging:true
+   });
+ 
+ });//fin $('#screenshotChannels').click(function ()
+
+//pdf transformation
 $(function () {
 
     var specialElementHandlers = 
@@ -259,6 +321,7 @@ $(function () {
 
 });//end $('#csvPage').click(function () {
 
+//channel modal to cvs
 $('#csvModal').click(function () 
  {
   console.log("'#csvModal').click(function")
@@ -266,6 +329,7 @@ $('#csvModal').click(function ()
 
 });//end $('#csvModal').click(function ()   
 
+//video modal to cvs
 $('#csvModalVideo').click(function () 
  {
   console.log("'#csvModalVideo').click(function")
@@ -280,7 +344,6 @@ $('#csvModalVideo').click(function ()
 jQuery(document).ready(function ($) {
 
 
-
 $('#infl-yt-label').on('click', function() {
     //$('#infl-inp-search').attr("placeholder","YouTube input...");
     $('#infl-form-ig').hide();
@@ -292,15 +355,7 @@ $('#infl-it-label').on('click', function() {
     $('#infl-form-yt').hide();
     $('#infl-form-ig').show();
 });
-
-// $('#infl-type-yt').on('change', function()
-// {
-//   if($('#infl-type-yt').val() == "video"){
-//      $('infl-location-yt').show();
-
-//   }
-// });
-
+//display the location dropdown
 $(function() {
     $('#infl-location').hide(); 
     $('#infl-type-yt').change(function(){
@@ -312,14 +367,13 @@ $(function() {
     });
 });
 
-
+//search button
  $("#searchchannels").on("click", function(e) 
  {
     $('#infl-resultat').empty();
     $('#scrollprev').empty();
     $('#scrollnext').empty();
      
-    //console.log($("#infl-inp-search-yt").val());
      e.preventDefault();
        // prepare the request
 
@@ -330,23 +384,15 @@ $(function() {
             isLoad = true;
             type = $("#infl-type-yt").val();
             console.log("LE TYPE ICI :"+type);
-            maxResults = $("#infl-resultat-page-yt").val();
-            //console.log('-------------------------------------------');
-            //console.log(type);
-            //console.log('-------------------------------------------');
+            maxResults = $("#infl-resultat-page-yt").val()
             execRequest(type,maxResults);
         }); 
      
-    //alert(1);
 });//end $("#searchchannels").on("click", function()
-
- 
-
 });
 
+//second YouTube API query
 function getStats(item, type, maxResults){
-    //console.log("function getStats")
-    //console.log('get stat'+type);
     var part="statistics";
     if (type !== 'video'){
       part+=", brandingSettings";
@@ -357,7 +403,6 @@ function getStats(item, type, maxResults){
     var baseurl="https://www.googleapis.com/youtube/v3/"+type+"s/";
     var url=baseurl+"?"+"part="+part+"&id="+id+"&key="+key;
 
-    //console.log("function getStats")
         $.ajax({
 
        url: url,
@@ -366,26 +411,18 @@ function getStats(item, type, maxResults){
           format: 'json'
        },
        error: function() {
-          //console.log('<p>An error has occurred</p>');
-            //return item;
-            //item = concatJSON(item,data);
-            //console.log(item)
-            //return item;
-            //display(item); 
+          
         },
         success: function(data){
              item = concatJSON(item,data);
              resultsArray.push(item);
              nbItemsTraites++;
              if(nbItemsTraites == maxResults){
-              //console.log(nbItemsTraites);
               console.log(resultsArray);
              }
 
             console.log(data);
             //return item;
-
-            
 
           if (type == "video"){
             displayVideo(item);
@@ -399,11 +436,10 @@ function getStats(item, type, maxResults){
 }//fin getStat
 
 function display(item){
-    //console.log("!!!!!!!!!!!ICI!!!!!!!"+JSON.stringify(item));
     $.get("vues/resultyt.php", function(data)
         {
             var params = {
-              "id":item.snippet.channelId,
+            "id":item.snippet.channelId,
             "title":item.snippet.title, 
             "channeltitle":item.snippet.channelTitle, 
             "videoid":item.id.videoId, 
@@ -411,31 +447,27 @@ function display(item){
             "description":item.snippet.description,
             "subscriberCount":numberWithCommas(item.items[0].statistics.subscriberCount), 
              "viewCount":numberWithCommas(item.items[0].statistics.viewCount), 
-            // "commentCount":stats.items[0].statistics.commentCount,
+           
             "videoCount":numberWithCommas(item.items[0].statistics.videoCount),
             "averageView":numberWithCommas(Math.ceil(item.items[0].statistics.viewCount/item.items[0].statistics.videoCount)),
-          //     if (json.item("country")){
-    // "country" = json.getString("country"));}
-
-    "country":item.items[0].brandingSettings.channel.country || "country not available",
+            "country":item.items[0].brandingSettings.channel.country || "country not available",
             
         }//fin params
-        
+     //send result to the div   
      $("#infl-resultat").append(tplawesome(data, [params]));
      
-     //console.log(params.subscriberCount);
-     //tri par defaut
-    //trier("video");
+      //tri par defaut
+      //trier("video");
 
+    //display modal on click
     $(".card").on("click", function(e) 
     {
-      //$(this).find('img').attr('src', $(this).find('img').attr('src').replace("_off", "_on"));
-      //$('#image').attr('src')($(this).find('img').attr('src'));
+      
       copyImage =$(this).find('img').attr('src');
       copyTitle =$(this).find('img').attr('alt');
       $('#image').attr('src',copyImage);
       $('#image').attr('alt',copyTitle)
-      //console.log( $(this).find('image').html()));  
+      
        $('#title').html($(this).find('.title').html());   
        $('#description').html($(this).find('.description').html());
        $('#subscriberCount').html($(this).find('.subscriberCount').html());
@@ -443,58 +475,45 @@ function display(item){
        $('#viewCount').html($(this).find('.viewCount').html());
        $('#averageView').html($(this).find('.averageView').html());
        $('#url').html($(this).find('.test').attr('href'));
-       //$('#id').html($(this).find('.id').html());
-       //$('a').html($(this).find('.test').attr('href'));
        $('#country').html($(this).find('.country').html());
-
-
+       //modal call
       $('#myModal').modal();
     });//fin appel modal
 
-
     });// fin $.get
-
 
 }//fin fonction display
 
+
 function displayVideo(item){
-    //console.log("!!!!!!!!!!!ICI!!!!!!!"+JSON.stringify(item));
     $.get("vues/resultyt_videos.php", function(data)
         {
-          //console.log('--------*****************************');
+         
             var params = {
-              "id":item.id.videoId,
+            "id":item.id.videoId,
             "title":item.snippet.title, 
             "channeltitle":item.snippet.channelTitle, 
-            //"videoid":item.id.videoId, 
             "thumbnail":item.snippet.thumbnails.high.url, 
             "description":item.snippet.description,
-            //"subscriberCount":numberWithCommas(item.items[0].statistics.subscriberCount), 
              "viewCount":numberWithCommas(item.items[0].statistics.viewCount), 
             "likeCount":numberWithCommas(item.items[0].statistics.likeCount),
             "dislikeCount":numberWithCommas(item.items[0].statistics.dislikeCount),
             "favoriteCount":numberWithCommas(item.items[0].statistics.favoriteCount),
             "commentCount":item.items[0].statistics.commentCount ? numberWithCommas(item.items[0].statistics.commentCount):"0",
         }//fin params
-        console.log('????????????????????????????????????????????');
-        //console.log(data.pageInfo.totalResults);
-        //https://developers.google.com/apis-explorer/#s/youtube/v3/youtube.search.list?part=snippet&location=37.42307%252C-122.08427&locationRadius=50km&maxResults=10&order=date&_h=2&
         
      $("#infl-resultat").append(tplawesome(data, [params]));
      
-     //console.log(params.subscriberCount);
      //tri par defaut
-    trier("trierviews");
+    //trier("trierviews");
 
      $(".card").on("click", function(e) 
     {
-      //$(this).find('img').attr('src', $(this).find('img').attr('src').replace("_off", "_on"));
-      //$('#image').attr('src')($(this).find('img').attr('src'));
+
       copyImage =$(this).find('img').attr('src');
       copyTitle =$(this).find('img').attr('alt');
       $('#imagevideo').attr('src',copyImage);
       $('#imagevideo').attr('alt',copyTitle)
-      //console.log( $(this).find('image').html()));
        $('#idvideo').html($(this).find('.id').html());     
        $('#titlevideo').html($(this).find('.title').html());   
        $('#descriptionvideo').html($(this).find('.description').html());
@@ -506,20 +525,15 @@ function displayVideo(item){
        $('#commentCountvideo').html($(this).find('.commentCount').html());
        $('#commentCountvideo').html($(this).find('.commentCount').html());
        $('#urlvideo').html($(this).find('.test').attr('href'));
-       //console.log("video id iciiiiiiiii"+$(this).find('.test').attr('href'));
-       //$('#country').html($(this).find('.country').html());
-       //console.log(copyImage);
-       //console.log(videocount);
-
-
+      
       $('#ModalVideo').modal();
     });//fin appel modal
 
     });// fin $.get
 
-
 }//fin fonction display
 
+//initiating the API call
 function init() {
     gapi.client.setApiKey("AIzaSyDLewZHq9HxLqZYw_Gt2_y75_Nl4LyDRk4");
     gapi.client.load("youtube", "v3", function() {
@@ -528,14 +542,15 @@ function init() {
     });
 }
 
+//formating numbers with commas
 function numberWithCommas(x) {
   //console.log('x = '+x);
      return x.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
  }
 
- function concatJSON(jSon1, jSon2){
-//console.log(jSon1)
-//console.log(jSon2)
+//merges both Json files
+function concatJSON(jSon1, jSon2){
+
 for (var key in jSon2){
 
     //console.log("key="+key);
@@ -545,6 +560,7 @@ for (var key in jSon2){
 return jSon1;
 }
 
+//sorting the results
 function trier(type){
     if(type == "video"){
         $("#infl-resultat div.card").sort(sort_item).appendTo('#infl-resultat');
@@ -591,13 +607,12 @@ function sort_views_asc(a, b) {
     return parseInt(replace($(b).data('view'))) < parseInt(replace($(a).data('view'))) ? 1 : -1;
 }
 
+
 function replace(num){
 
     if(Number.isInteger(num) == false){
         return num.replace(/,/g,"");
-
     }
-
     return num;
 }
 
@@ -614,6 +629,7 @@ function initTrie(){
     })
 }
 
+//Creating the PDF for one channel
 $(function () {
 
     var specialElementHandlers = 
@@ -636,7 +652,7 @@ $(function () {
 
 
 });//fin function 
-
+//Creating the PDF for one video
 $(function () {
 
     var specialElementHandlers = 
@@ -646,6 +662,7 @@ $(function () {
             return true;
         }
     };
+
  $('#cmdModalVideo').click(function () 
  {
   var title = $('#titlevideo a').text();
@@ -660,6 +677,7 @@ $(function () {
 }); 
 }); 
 
+//Creating the CSV for the channels
 function convertToCSV(objArray) {
     var json = objArray;
     console.log(json);
@@ -702,6 +720,7 @@ function convertToCSV(objArray) {
             return str;
   }// fin function convertToCSV
 
+//Creating the CSV for videos
   function convertToCSVVideos(objArray) {
     var json = objArray;
     console.log(json);
@@ -742,10 +761,10 @@ function convertToCSV(objArray) {
             return str;
   }// fin function convertToCSV
 
-
+//Creating the CSV for videos
   function convertToCSVModal(){
 
-       var fields= ["channelTitle","description","subscriberCount","viewCount","videoCount","view/video","URL","country"];
+    var fields= ["channelTitle","description","subscriberCount","viewCount","videoCount","view/video","URL","country"];
     var str = "data:text/csv;charset=utf-8,";
     str += fields.join(',');
     str += '\n';

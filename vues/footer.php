@@ -3,7 +3,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
 
-    <div class="modal-content">
+    <div id="contentchannel" class="modal-content">
       <div class="modal-header">
       	<h2 id="title" class="card-title">{{title}}</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -76,6 +76,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary mr-auto" data-dismiss="modal">Close</button>
         <button id="cmd" type="button" class="btn btn-primary">PDF</button>
+        <button id="cmdScreenshotChannel" type="button" class="btn btn-primary">Screenshot</button>
         <button id="csvModal" type="button" class="btn btn-primary">CSV</button>
 
       </div>
@@ -88,7 +89,7 @@
 <!-- Modal Videos-->
 <div class="modal fade" id="ModalVideo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
+    <div id="contentvideo" class="modal-content">
       <div class="modal-header">
         <h2 id="titlevideo" class="card-title ml-2">{{title}}</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -130,6 +131,7 @@
       <div class="modal-footer">
         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
         <button id="cmdModalVideo" type="button" class="btn btn-primary">PDF</button>
+        <button id="cmdScreenshotVideo" type="button" class="btn btn-primary">Screenshot</button>
         <button id="csvModalVideo" type="button" class="btn btn-primary">CSV</button>
 
       </div>
