@@ -49,7 +49,10 @@ class Routeur {
 			if($id) {
 				$id = Utils::filtreFort($id);
 				$ctrlIg = new ControleurInstagram;
-				$ctrlIg->report($id);
+				if(isset($_SESSION['infl-token-ig'])) {
+					$token = $_SESSION['infl-token-ig'];
+				}
+				$ctrlIg->report($id, $token);
 			} else {
 				header("Location: ".PATH);
 			}

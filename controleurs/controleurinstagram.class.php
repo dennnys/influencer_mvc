@@ -7,9 +7,10 @@ class ControleurInstagram {
 	}
 
 	public function execute() {
-		if (Utils::getPost('infl-inp-search-ig')) {
+		if (Utils::getPost('infl-inp-search-ig') && Utils::getPost('infl-token-ig')) {
 			$urlIg = Utils::filtreFort($_POST['infl-inp-search-ig']);
-			$this->report($urlIg);
+			$token = Utils::filtreFort($_POST['infl-token-ig']);
+			$this->report($urlIg, $token);
 		} else {
 			$this->searchIn();
 		}
@@ -29,12 +30,11 @@ class ControleurInstagram {
 		if (Utils::getPost('infl-engagement-min-ig')) $param['filter[engagements][left_number]'] = intval(Utils::filtreFort($_POST['infl-engagement-min-ig']));
 		if (Utils::getPost('infl-engagement-max-ig')) $param['filter[engagements][right_number]'] = intval(Utils::filtreFort($_POST['infl-engagement-max-ig'])); 
 		$token = '';
-		if (Utils::getPost('infl-token-ig')) $token = Utils::filtreFort($_POST['infl-token-ig']);
-/*
-echo "<pre>";
-      var_dump($param); die();
-echo "</pre>";
-*/
+		if (Utils::getPost('infl-token-ig')) {
+			$token = Utils::filtreFort($_POST['infl-token-ig']);
+			$_SESSION['infl-token-ig'] = $token;
+		}
+		
 			$query_reponse_ig = Unirest\Request::post("https://deepsocialapi.com/v1/accounts/search?api_token=".$token,
 				array(
 					"Accept" => "application/json"
@@ -44,142 +44,13 @@ echo "</pre>";
 
 			$reponse_ig = $query_reponse_ig->body;
 
-
-/*
-	$reponse_ig = (object) (array(
-   'quota_remaining' => 20,
-   'total' => 157,
-   'accounts' => 
-  array (
-    0 => 
-    (object) (array(
-       'socialId' => '354945278',
-       'name' => 'nilmoretto',
-       'link' => 'https://instagram.com/nilmoretto',
-       'fullname' => 'Nil Moretto',
-       'followers' => 766884,
-       'picture' => 'https://scontent.cdninstagram.com/t51.2885-19/s150x150/10549914_1701958446686938_1569534331_a.jpg',
-       'engagements' => 32247,
-       'geoLocation' => 
-      array (
-        0 => 
-        (object) (array(
-           'id' => 1428125,
-           'title' => 'Canada',
-           'type' => 'country',
-        )),
-      ),
-       'brandCategories' => 
-      array (
-        0 => 
-        (object) (array(
-           'id' => 1,
-           'title' => 'Television & Film',
-        )),
-      ),
-       'ages' => '25-34',
-    )),
-    1 => 
-    (object) (array(
-       'socialId' => '354046995',
-       'name' => 'collinjoseph_fit',
-       'link' => 'https://instagram.com/collinjoseph_fit',
-       'fullname' => '#1 Most Interactive Fit Acc.',
-       'followers' => 760778,
-       'picture' => 'https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s150x150/15306568_212149095897068_2749313814343188480_a.jpg',
-       'engagements' => 7072,
-       'geoLocation' => 
-      array (
-        0 => 
-        (object) (array(
-           'id' => 1428125,
-           'title' => 'Canada',
-           'type' => 'country',
-        )),
-      ),
-       'brandCategories' => 
-      array (
-        0 => 
-        (object) (array(
-           'id' => 1,
-           'title' => 'Television & Film',
-        )),
-      ),
-       'ages' => '25-34',
-    )),
-    2 => 
-    (object) (array(
-       'socialId' => '11929849',
-       'name' => 'donnahpham',
-       'link' => 'https://instagram.com/donnahpham',
-       'fullname' => '@donnahpham 🎀',
-       'followers' => 577262,
-       'picture' => 'https://scontent.cdninstagram.com/t51.2885-19/s150x150/12142296_409514315904012_1226668063_a.jpg',
-       'engagements' => 5758,
-       'geoLocation' => 
-      array (
-        0 => 
-        (object) (array(
-           'id' => 1428125,
-           'title' => 'Canada',
-           'type' => 'country',
-        )),
-      ),
-       'brandCategories' => 
-      array (
-        0 => 
-        (object) (array(
-           'id' => 1,
-           'title' => 'Television & Film',
-        )),
-      ),
-       'ages' => '25-34',
-    )),
-    3 => 
-    (object) (array(
-       'socialId' => '14662674',
-       'name' => 'hayleaulaw',
-       'link' => 'https://instagram.com/hayleaulaw',
-       'fullname' => 'hayleau • hayley',
-       'followers' => 432265,
-       'picture' => 'https://scontent.cdninstagram.com/t51.2885-19/s150x150/21433549_271955959966689_1091351009524973568_a.jpg',
-       'engagements' => 17625,
-       'geoLocation' => 
-      array (
-        0 => 
-        (object) (array(
-           'id' => 1428125,
-           'title' => 'Canada',
-           'type' => 'country',
-        )),
-      ),
-       'brandCategories' => 
-      array (
-        0 => 
-        (object) (array(
-           'id' => 1,
-           'title' => 'Television & Film',
-        )),
-      ),
-       'ages' => '25-34',
-    )),
-  ),
-));
-*/
-		/*
-			echo "<pre>";
-			var_dump($reponse_ig);
-			echo "</pre>"; die();
-*/
-    $_SESSION['temp_object'] = $reponse_ig;
+		$_SESSION['temp_object'] = $reponse_ig;
 		$vue = new ControleurVue();
 		$vue->create('resultIg', ['data'=>$reponse_ig]);
 	}
 
-	public function report($url) {
-
-		$token = '9xbo5flvt7so0gg';
-    if (Utils::getPost('infl-token-ig')) $token = Utils::filtreFort($_POST['infl-token-ig']);
+	public function report($url, $token = '9xbo5flvt7so0gg') {
+		if (Utils::getPost('infl-token-ig')) $token = Utils::filtreFort($_POST['infl-token-ig']);
 
 		$query_report_ig = Unirest\Request::post("https://deepsocialapi.com/v1/sampling_request",
 			array(
